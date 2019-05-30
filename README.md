@@ -1,4 +1,4 @@
-# 💣 bomb3r 
+# bomb3r 💣
 
 Made with ❤ in IN.
 
