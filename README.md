@@ -19,7 +19,7 @@ pip3 install -r requirements.txt
 ```bash
 python3 bomb.py <TARGET>
 ```
-where <TARGET> is target mobile number.
+where TARGET is target mobile number.
 
 ## Options
 
