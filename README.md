@@ -8,9 +8,11 @@ Made with ❤ in IN.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install bomb3r.
+Use the package manager [pip](https://pip.pypa.io/en/stable/installing/) to install bomb3r.
 
 ```bash
+git clone https://github.com/iMro0t/bomb3r.git
+cd bomb3r
 pip3 install -r requirements.txt
 ```
 
