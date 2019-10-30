@@ -6,13 +6,13 @@ import json,random
 headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0","Accept":"*/*","Accept-Language":"en-US,en;q=0.5","Accept-Encoding":"gzip, deflate"}
 
 ### CONFIG ###
-CONFIG = {"version": 1.0, "created_by": "iMro0t", "credits": ["InsideU", "bhattsameer", "KANG-NEWBIE"], "providers": [{"name": "confirmtkt", "method": "GET", "type": "HTTPS", "multi": False, "url": "securedapi.confirmtkt.com/api/platform/register?newOtp=true&mobileNumber=", "identifier": "false", "last_modified": "2019-05-20"}, {"name": "justdial", "method": "GET", "type": "HTTPS", "multi": False, "url": "t.justdial.com/api/india_api_write/18july2018/sendvcode.php?mobile=", "identifier": "sent", "last_modified": "2019-05-20"}, {"name": "oyorooms", "method": "GET", "type": "HTTPS", "multi": False, "url": "www.oyorooms.com/api/pwa/generateotp?country_code=91&nod=4&phone=", "identifier": "correct", "last_modified": "2019-05-20"}]}
+#CONFIG = {"version": 1.0, "created_by": "iMro0t", "credits": ["InsideU", "bhattsameer", "KANG-NEWBIE"], "providers": [{"name": "confirmtkt", "method": "GET", "type": "HTTPS", "multi": False, "url": "securedapi.confirmtkt.com/api/platform/register?newOtp=true&mobileNumber=", "identifier": "false", "last_modified": "2019-05-20"}, {"name": "justdial", "method": "GET", "type": "HTTPS", "multi": False, "url": "t.justdial.com/api/india_api_write/18july2018/sendvcode.php?mobile=", "identifier": "sent", "last_modified": "2019-05-20"}, {"name": "oyorooms", "method": "GET", "type": "HTTPS", "multi": False, "url": "www.oyorooms.com/api/pwa/generateotp?country_code=91&nod=4&phone=", "identifier": "correct", "last_modified": "2019-05-20"}]}
 
 class Provider:
     global headers,CONFIG
     def __init__(self, target):
-        self.config = CONFIG['providers'][random.randint(0,2)]
-        #self.config = json.load(open('original.json','r'))['providers'][random.randint(0,2)]
+        #self.config = CONFIG['providers'][random.randint(0,2)]
+        self.config = json.load(open('original.json','r'))['providers'][random.randint(0,2)]
         self.target = target
         self.headers = self._headers()
         self.method = self.config['method']
