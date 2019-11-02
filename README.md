@@ -27,7 +27,7 @@ where TARGET is target mobile number.
 ## Options
 
 ```
-usage: bomb.py [-h] [--sms SMS] [--threads THREADS] TARGET
+usage: bomber.py [-h] [--sms SMS] [--threads THREADS] TARGET
 
 positional arguments:
   TARGET                    Target mobile number without country code (default:+91)
@@ -37,10 +37,10 @@ optional arguments:
   --sms SMS, -S SMS         Number of sms to target (default: 10)
   --threads THREADS, -T THREADS
                             Number of threads (default: 10)
-  --proxy, -p           Use proxy for bombing (It is                             advisable to use this
+  --proxy, -p           Use proxy for bombing (It is advisable to use this
                           option if you are bombing more than 50 sms)
   --verbose, -v         Verbose
-  --verify, -V          To verify all providers are                             working or not
+  --verify, -V          To verify all providers are working or not
 ```
 
 ## License
