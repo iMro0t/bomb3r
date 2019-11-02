@@ -3,13 +3,14 @@
 import requests
 import argparse
 from concurrent.futures import ThreadPoolExecutor
-import json, time
+import json
+import time
 from Provider import Provider
 
 # args
 
 parser = argparse.ArgumentParser()
-parser.add_argument('target', metavar='TARGET', type=lambda value: (_ for _ in ()).throw(argparse.ArgumentTypeError(f'{value} is an invalid mobile number')) if len(value)!=10 else value,
+parser.add_argument('target', metavar='TARGET', type=lambda value: (_ for _ in ()).throw(argparse.ArgumentTypeError(f'{value} is an invalid mobile number')) if len(value) != 10 else value,
                     help='Target mobile number without country code')
 parser.add_argument('--sms', '-S', type=int,
                     help='Number of sms to target (default: 10)', default=10)
@@ -30,7 +31,8 @@ target = str(args.target)
 no_of_threads = args.threads
 no_of_sms = args.sms
 fails, success = 0, 0
-not args.verbose and not args.verify and print(f'Target: {target} | Threads: {no_of_threads} | SMS: {no_of_sms}')
+not args.verbose and not args.verify and print(
+    f'Target: {target} | Threads: {no_of_threads} | SMS: {no_of_sms}')
 
 # proxy setup
 # https://gimmeproxy.com/api/getProxy?curl=true&protocol=http&supportsHttps=true
@@ -38,15 +40,20 @@ not args.verbose and not args.verify and print(f'Target: {target} | Threads: {no
 
 def get_proxy():
     args.verbose and print('Gethering proxy...')
-    curl = requests.get('https://gimmeproxy.com/api/getProxy?curl=true&protocol=http&supportsHttps=true').text
+    curl = requests.get(
+        'https://gimmeproxy.com/api/getProxy?curl=true&protocol=http&supportsHttps=true').text
     if 'limit' in curl:
         print('Proxy limitation error. Try without `-p` or `--proxy` argument')
         exit()
     args.verbose and print(f'Using Proxy: {curl}')
     return {"http": curl, "https": curl}
+
+
 proxies = get_proxy() if args.proxy else False
 
 # bomber function
+
+
 def bomber(p):
     global fails, success, no_of_sms
     if p is None or success > no_of_sms:
@@ -59,27 +66,31 @@ def bomber(p):
             else:
                 fails += 1
         except:
-            fails+=1
-            args.verbose or args.verify and print('{:12}: error'.format(p.config['name']))
-    not args.verbose and not args.verify and print(f'Bombing : {success+fails}/{no_of_sms} | Success: {success} | Failed: {fails}', end='\r')
+            fails += 1
+            args.verbose or args.verify and print(
+                '{:12}: error'.format(p.config['name']))
+    not args.verbose and not args.verify and print(
+        f'Bombing : {success+fails}/{no_of_sms} | Success: {success} | Failed: {fails}', end='\r')
 
 
 # threadsssss
 start = time.time()
 if args.verify:
-    conf = json.load(open('config.json','r'))['providers']
-    for key,value in conf.items():         
-        if args.country and key!='multi' and str(args.country)!=key:
+    conf = json.load(open('config.json', 'r'))['providers']
+    for key, value in conf.items():
+        if args.country and key != 'multi' and str(args.country) != key:
             continue
         for i in value:
-            p = Provider(target, proxy=proxies, verbose=True, cc=str(args.country))
+            p = Provider(target, proxy=proxies,
+                         verbose=True, cc=str(args.country))
             p.config = i
             p._headers()
             bomber(p)
 else:
     with ThreadPoolExecutor(max_workers=no_of_threads) as executor:
         for i in range(no_of_sms):
-            p = Provider(target, proxy=proxies, verbose=args.verbose, cc=str(args.country))
+            p = Provider(target, proxy=proxies,
+                         verbose=args.verbose, cc=str(args.country))
             executor.submit(bomber, (p))
 end = time.time()
 

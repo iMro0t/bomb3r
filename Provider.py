@@ -7,9 +7,11 @@ class Provider:
 
     def __init__(self, target, proxy={}, verbose=False, cc='91'):
         try:
-            self.config = random.choice(json.load(open('config.json', 'r'))['providers'][cc]) 
+            self.config = random.choice(
+                json.load(open('config.json', 'r'))['providers'][cc])
         except:
-            self.config = random.choice(json.load(open('config.json', 'r'))['providers']['multi']) 
+            self.config = random.choice(
+                json.load(open('config.json', 'r'))['providers']['multi'])
         self.target = target
         self.headers = self._headers()
         self.done = False
@@ -41,7 +43,7 @@ class Provider:
     def _get(self):
         url = self.config['url'] + self.target
         if 'cc_target' in self.config:
-            url += '&'+ self.config['cc_target'] + '=' + self.cc 
+            url += '&' + self.config['cc_target'] + '=' + self.cc
         return requests.get(url, headers=self.headers, timeout=10, proxies=self.proxy)
 
     def _post(self):
@@ -60,7 +62,8 @@ class Provider:
 
     def status(self):
         if self.config['identifier'] in self.resp.text:
-            self.verbose and print('{:12}: success'.format(self.config['name']))
+            self.verbose and print(
+                '{:12}: success'.format(self.config['name']))
             return True
         else:
             self.verbose and print('{:12}: failed'.format(self.config['name']))
