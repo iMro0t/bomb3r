@@ -19,7 +19,7 @@ pip3 install -r requirements.txt
 ## Usage
 
 ```bash
-python3 bomb.py <TARGET>
+python3 bomber.py <TARGET>
 ```
 
 where TARGET is target mobile number.
@@ -37,6 +37,10 @@ optional arguments:
   --sms SMS, -S SMS         Number of sms to target (default: 10)
   --threads THREADS, -T THREADS
                             Number of threads (default: 10)
+  --proxy, -p           Use proxy for bombing (It is                             advisable to use this
+                          option if you are bombing more than 50 sms)
+  --verbose, -v         Verbose
+  --verify, -V          To verify all providers are                             working or not
 ```
 
 ## License
