@@ -35,6 +35,8 @@ positional arguments:
 optional arguments:
   -h, --help                show this help message and exit
   --sms SMS, -S SMS         Number of sms to target (default: 10)
+  --country COUNTRY, -c COUNTRY
+                        Country code without (+) sign (default: 91)
   --threads THREADS, -T THREADS
                             Number of threads (default: 10)
   --proxy, -p           Use proxy for bombing (It is advisable to use this
