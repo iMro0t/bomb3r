@@ -45,6 +45,16 @@ optional arguments:
   --verify, -V          To verify all providers are working or not
 ```
 
+## Changelog
+
+```
+    -- Nov, 2019
+      - multiple country option
+      - more api for india
+      - proxy feature to avoid ip blocking
+      - new verbose and verify option
+```
+
 ## License
 
 This project is licensed under the [GNU General Public License v3.0](https://github.com/iMro0t/bomb3r/blob/master/LICENSE)
