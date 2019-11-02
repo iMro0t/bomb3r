@@ -4,7 +4,7 @@ Made with ❤ in IN.
 
 ## For Windows 10/8.x/7
 
-> Use windows [releases](https://github.com/iMro0t/bomb3r/releases)
+> Use windows [releases](https://github.com/iMro0t/bomb3r/releases) (windows release is not up-to date)
 
 ## Installation
 
