@@ -48,6 +48,10 @@ optional arguments:
 ## Changelog
 
 ```
+    -- Mar, 2020
+      - added more configs
+      - fixed some bugs
+      
     -- Nov, 2019
       - multiple country option
       - more api for india
