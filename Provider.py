@@ -1,17 +1,22 @@
 import requests
+import urllib3
 import json
 import random
 
+DEFAULT_TIMEOUT = 30
+VERIFY = True
+not VERIFY and urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+with open('config.json', 'r') as f:
+    PROVIDERS = json.load(f)['providers']
 
 class Provider:
 
-    def __init__(self, target, proxy={}, verbose=False, cc='91'):
-        try:
-            self.config = random.choice(
-                json.load(open('config.json', 'r'))['providers'][cc])
-        except:
-            self.config = random.choice(
-                json.load(open('config.json', 'r'))['providers']['multi'])
+    def __init__(self, target, proxy={}, verbose=False, cc='91', config=False):
+        if config:
+            self.config = config
+        else:
+            self.config = random.choice(PROVIDERS[cc if cc in PROVIDERS else 'multi'])
         self.target = target
         self.headers = self._headers()
         self.done = False
@@ -23,14 +28,7 @@ class Provider:
         tmp_headers = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0"}
         if 'headers' in self.config:
-            for key, value in self.config['headers'].items():
-                tmp_headers[key] = value
-        if 'data_type' in self.config and self.config['data_type'].lower() == "json":
-            tmp_headers['Content-Type'] = 'application/json'
-            self.data_type = 'json'
-        else:
-            tmp_headers['Content-Type'] = 'application/x-www-form-urlencoded'
-            self.data_type = 'urlencoded'
+            tmp_headers.update(self.config['headers'])
         return tmp_headers
 
     def _data(self):
@@ -44,13 +42,13 @@ class Provider:
         url = self.config['url'] + self.target
         if 'cc_target' in self.config:
             url += '&' + self.config['cc_target'] + '=' + self.cc
-        return requests.get(url, headers=self.headers, timeout=10, proxies=self.proxy)
+        return requests.get(url, headers=self.headers, timeout=DEFAULT_TIMEOUT, proxies=self.proxy, verify=VERIFY)
 
     def _post(self):
-        if self.data_type == "json":
-            return requests.post(self.config['url'], json=self.data, headers=self.headers, timeout=10, proxies=self.proxy)
-        elif self.data_type == "urlencoded":
-            return requests.post(self.config['url'], data=self.data, headers=self.headers, timeout=10, proxies=self.proxy)
+        if 'data_type' in self.config and self.config['data_type'].lower() == "json":
+            return requests.post(self.config['url'], json=self.data, headers=self.headers, timeout=DEFAULT_TIMEOUT, proxies=self.proxy, verify=VERIFY)
+        else:
+            return requests.post(self.config['url'], data=self.data, headers=self.headers, timeout=DEFAULT_TIMEOUT, proxies=self.proxy, verify=VERIFY)
 
     def start(self):
         if self.config['method'] == 'GET':
