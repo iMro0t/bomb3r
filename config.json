@@ -16,12 +16,6 @@
         "identifier": "sent"
       },
       {
-        "name": "oyorooms",
-        "method": "GET",
-        "url": "https://www.oyorooms.com/api/pwa/generateotp?country_code=91&nod=4&phone=",
-        "identifier": "correct"
-      },
-      {
         "name": "frotels",
         "method": "POST",
         "url": "https://www.frotels.com/appsendsms.php",
@@ -77,16 +71,6 @@
         "identifier": "sent"
       },
       {
-        "name": "grabon",
-        "method": "POST",
-        "url": "https://www.grabon.in/giftcards/verify/",
-        "target_param": "phonenumber",
-        "data": {
-          "phonenumber": ""
-        },
-        "identifier": "npub"
-      },
-      {
         "name": "nnnow",
         "method": "POST",
         "url": "https://api.nnnow.com/d/api/appDownloadLink",
@@ -99,12 +83,12 @@
       {
         "name": "ajio",
         "method": "POST",
-        "url": "https://www.ajio.com/api/auth/signupSendOTP",
+        "url": "https://login.web.ajio.com/api/auth/signupSendOTP",
         "target_param": "mobileNumber",
         "data": {
-          "firstName": "a",
-          "login": "iodry65i@wdafw.com",
-          "password": "awf324",
+          "firstName": "xxps",
+          "login": "wiqpdl223@wqew.com",
+          "password": "QASpw@1s",
           "genderType": "Male",
           "mobileNumber": "",
           "requestType": "SENDOTP"
@@ -122,6 +106,7 @@
         "method": "POST",
         "url": "https://unacademy.com/api/v1/user/get_app_link/",
         "target_param": "phone",
+        "data_type": "json",
         "data": {
           "phone": ""
         },
@@ -176,7 +161,7 @@
         "data": {
           "contactNo": ""
         },
-        "identifier": "success@1"
+        "identifier": "success@::::"
       },
       {
         "name": "grofers",
@@ -187,9 +172,9 @@
           "user_phone": ""
         },
         "headers": {
-          "auth_key": "f0ff43cbba473a0ddc03e2a6c0f79fc65779edc83aaad18caa2a4f4ddaac09fc"
+          "auth_key": "3f0b81a721b2c430b145ecb80cfdf51b170bf96135574e7ab7c577d24c45dbd7"
         },
-        "identifier": "sent"
+        "identifier": "We have sent"
       },
       {
         "name": "dream11",
@@ -210,47 +195,19 @@
         "identifier": "Successfully"
       },
       {
-        "name": "olx",
-        "method": "POST",
-        "cc_target": "descriptor",
-        "url": "https://www.olx.in/api/challenges",
-        "target_param": "descriptor",
-        "data_type": "json",
-        "data": {
-          "type": "phone",
-          "descriptor": "+"
-        },
-        "identifier": "number"
-      },
-      {
         "name": "paytm",
         "method": "POST",
         "url": "https://commonfront.paytm.com/v4/api/sendsms",
         "target_param": "phone",
         "data_type": "json",
         "data": {
-          "phone": ""
+          "phone": "",
+          "guid":"2952fa812660c58dc160ca6c9894221d"
         },
-        "identifier": "403"
+        "identifier": "202"
       }
     ],
     "multi": [
-      {
-        "name": "redbus",
-        "method": "POST",
-        "cc_target": "SMSMessage[phoneCode]",
-        "url": "https://www.redbus.in/Info/SendMobileSMS/",
-        "target_param": "SMSMessage[mobileNo]",
-        "data": {
-          "IsTemplateUsedForMessage": "true",
-          "NotificationType": "SMS",
-          "SMSMessage[mobileNo]": "",
-          "SMSMessage[phoneCode]": "",
-          "CustomMessageDetails[DataComplexity]": "KVP",
-          "CustomMessageDetails[TemplateName]": "DownloadAppLink"
-        },
-        "identifier": "sent"
-      },
       {
         "name": "flipkart",
         "method": "POST",
@@ -268,11 +225,90 @@
         "identifier": "emailMask"
       },
       {
-        "name": "redbus2",
-        "method": "GET",
-        "cc_target": "phoneCode",
-        "url": "https://www.redbus.in/Personalization/SendOTP?OTPSource=SIGNIN&mobile=",
-        "identifier": "true"
+        "name":"qlean",
+        "method": "POST",
+        "cc_target": "phone",
+        "url": "https://qlean.ru/clients-api/v2/sms_codes/auth/request_code",
+        "target_param": "phone",
+        "data": {
+          "phone": ""
+        },
+        "identifier":"request_id"
+      },
+      {
+        "name": "mail.ru",
+        "method": "POST",
+        "url": "https://cloud.mail.ru//api/v2/notify/applink",
+        "cc_target": "phone",
+        "target_param":"phone",
+        "data_type":"json",
+        "data":{
+          "phone": "+",
+          "api": "2",
+          "email": "email",
+          "x-email": "x-email"
+        },
+        "identifier":"200"
+      },
+      {
+        "name":"gotinder",
+        "method": "POST",
+        "cc_target": "phone_number",
+        "url": "https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru",
+        "target_param": "phone_number",
+        "data": {
+          "phone_number": ""
+        },
+        "identifier":"200"
+      },
+      {
+        "name":"youla.ru",
+        "method":"POST",
+        "cc_target":"phone",
+        "target_param":"phone",
+        "url":"https://youla.ru/web-api/auth/request_code",
+        "data_type":"json",
+        "data":{
+          "phone": "+"
+        },
+        "identifier":"code_length"
+      },
+      {
+        "name":"ivi.ru",
+        "method":"POST",
+        "cc_target":"phone",
+        "target_param":"phone",
+        "url":"https://api.ivi.ru/mobileapi/user/register/phone/v6",
+        "data":{
+          "phone":""
+        },
+        "identifier":"true"
+      },
+      {
+        "name":"delitime.ru",
+        "method":"POST",
+        "cc_target":"SignupForm[username]",
+        "target_param":"SignupForm[username]",
+        "url":"https://api.delitime.ru/api/v2/signup",
+        "data":{
+          "SignupForm[username]":"",
+          "SignupForm[device_type]":"3"
+        },
+        "identifier":"true"
+      },
+      {
+        "name":"icq.com",
+        "method":"POST",
+        "cc_target":"msisdn",
+        "target_param":"msisdn",
+        "url":"https://www.icq.com/smsreg/requestPhoneValidation.php",
+        "data":{
+          "msisdn":"",
+          "locale":"en",
+          "k": "ic1rtwz1s1Hj1O0r",
+          "r": "45559"
+        },
+        "identifier":"200"
       }
     ]
   }
