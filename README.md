@@ -1,5 +1,8 @@
 # bomb3r 💣
 
+## This repository is currently unmaintained. 
+## Use this fork [YetAnotherSMSBomber](https://github.com/AvinashReddy3108/YetAnotherSMSBomber)
+
 Made with ❤ in IN.
 
 ## For Windows 10/8.x/7
